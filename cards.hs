@@ -22,12 +22,12 @@ type Deck = [Card]
 makeDeck :: Deck
 makeDeck = [ Card suit rank | suit <- [Club .. Spade], rank <- [Two, Three .. Ace] ]
 
-shuffle :: (RandomGen r) => r -> Deck -> Deck
-shuffle gen deck = shuffle' gen deck []
+shuffle :: (RandomGen r) => r -> [x] -> [x]
+shuffle gen l = shuffle' gen l []
 	where
 		shuffle' _ [] shuffled = shuffled
-		shuffle' g d  shuffled =
-			let (k, g')   = randomR (0, length d - 1) g
-			    (l, x:xs) = splitAt k d
-			in shuffle' g' (l ++ xs) (x:shuffled)
+		shuffle' g l shuffled =
+			let (k, g')   = randomR (0, length l - 1) g
+			    (h, x:xs) = splitAt k l
+			in shuffle' g' (h ++ xs) (x:shuffled)
 
