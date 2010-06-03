@@ -15,9 +15,11 @@ instance Eq Card where
     Card sa ra == Card sb rb = (sa == sb) && (ra == rb)
 
 instance Ord Card where
-    (Card sa ra) < (Card sb rb) | ra < rb = True
-                                | sa < sb = True
-                                | otherwise = False
+    compare (Card a b) (Card x y) | b < y            = LT
+                                  | b == y && a < x  = LT 
+                                  | b == y && a == x = EQ
+                                  | b > y            = GT
+                                  | b == y && a > x  = GT
 
 instance Bounded Card where
     minBound = Card minBound minBound
