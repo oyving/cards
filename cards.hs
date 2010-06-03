@@ -20,8 +20,8 @@ instance Ord Card where
                                 | otherwise = False
 
 instance Bounded Card where
-    minBound = Card Club Two
-    maxBound = Card Spade Ace
+    minBound = Card minBound minBound
+    maxBound = Card maxBound maxBound
 
 instance Enum Card where
     fromEnum (Card s r) = (fromEnum r) * 4 + (fromEnum s)
